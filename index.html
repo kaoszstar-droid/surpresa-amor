@@ -349,6 +349,7 @@
   var canvas = document.getElementById('heart-canvas');
   var ctx = canvas.getContext('2d');
   var points = [];
+  var heartFontSize = 14;
   var rafId = null;
   var startTime = null;
   var started = false;
@@ -367,6 +368,7 @@
     var w = window.innerWidth, h = window.innerHeight;
     var cx = w / 2, cy = h * 0.40;
     var scale = Math.min(w, h) / 50;
+    heartFontSize = Math.min(16, Math.max(7, Math.round(scale)));
 
     function heartXY(t, s) {
       var x = 16 * Math.pow(Math.sin(t), 3);
@@ -390,7 +392,7 @@
     if (!startTime) startTime = time;
     var elapsed = time - startTime;
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    ctx.font = '14px "Fira Code", monospace';
+    ctx.font = heartFontSize + 'px "Fira Code", monospace';
     for (var k = 0; k < points.length; k++) {
       var p = points[k];
       if (elapsed > p.delay) p.alpha += (p.targetAlpha - p.alpha) * 0.02;
